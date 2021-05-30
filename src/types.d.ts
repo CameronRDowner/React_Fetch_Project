@@ -1,5 +1,5 @@
 interface Item {
-    id: Number,
-    listId: Number,
-    name: String
+    id: number,
+    listId: number,
+    name: string
 }
