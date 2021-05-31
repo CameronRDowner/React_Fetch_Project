@@ -1,14 +1,12 @@
 import React from 'react';
-import './App.css';
-import { ItemList } from './components/ItemList';
+import './App.scss';
+import { ItemList } from './components/ItemList/ItemList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="app-wrapper">
         <h1>Fetch Hiring App</h1>
-      </header>
-      <ItemList></ItemList>
+      <ItemList/>
     </div>
   );
 }
