@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Select from 'react-select'
+import Select, { OptionTypeBase } from 'react-select'
 
 export const ItemList = () => {
-    const [itemsByList, setItemsByList] = useState({});
-    const [listSelected, setListSelected] = useState(null);
-    const [listOptions, setListOptions] = useState(null);
+    const [itemsByList, setItemsByList] = useState<{[listId: string]: Item[]}>({});
+    const [listSelected, setListSelected] = useState<OptionTypeBase>({});
+    const [listOptions, setListOptions] = useState<OptionTypeBase[]>([]);
 
     const endpointUrl = "https://fetch-hiring.s3.amazonaws.com/hiring.json"
 
@@ -34,23 +34,24 @@ export const ItemList = () => {
         return items.filter((item: Item) => { return item.name })
     }
 
-    const handleSelectChange = (event: any) => {
-        setListSelected(event.target.value)
+    const handleSelectChange = (option: OptionTypeBase) => {
+        setListSelected(option)
     }
 
     useEffect(() => {
         getItems().then((res) => {
             setItemsByList(groupItemsByListId(filterNamedItems(res.data)))
-            setListOptions(Object.keys(itemsByList).map(list => { return {value: list} }))
+            setListOptions(Object.keys(itemsByList).map(listId => { return {value: listId, label: listId} }))
+            setListSelected(listOptions[0])
         })
     }, [])
 
 
     return (
         <>
-        <Select options={Object.keys(itemsByList)} onChange={handleSelectChange}>
-            <option></option>
-        </Select>
+        {listOptions.length > 0 && 
+           <Select options={listOptions} onChange={handleSelectChange} defaultValue={listSelected}/>
+        }
         <ul>
 
         </ul>
