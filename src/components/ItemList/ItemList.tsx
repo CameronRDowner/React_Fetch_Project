@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Select, { OptionTypeBase } from 'react-select'
+import styles from './ItemList.module.scss'
 
 export const ItemList = () => {
     const [itemsByList, setItemsByList] = useState<{[listId: string]: Item[]}>({});
@@ -61,15 +62,15 @@ export const ItemList = () => {
             <div>
                 {listOptions.length > 0 && 
                 <div className="flex-row-center">
-                <span>List ID: </span>
+                <span className={styles['selectbox-label']}>List ID: </span>
                 <Select options={listOptions} onChange={handleSelectChange} value={listSelected}/>
                 </div>
                 }
             </div>
             {listSelected != null &&
-            <ul>
+            <ul className={styles['item-list']}>
                 {sortItemsByName(itemsByList[listSelected.value]).map(item => (
-                    <li key={item.id}>{item.name}</li>
+                    <li className={styles['item']} key={item.id}>{item.name}</li>
                 ))
                 }
             </ul>

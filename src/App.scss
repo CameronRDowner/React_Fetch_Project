@@ -1,9 +1,12 @@
+html {
+  font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+}
+
 .app-wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 90%;
   margin: 0 auto;
 }
 
