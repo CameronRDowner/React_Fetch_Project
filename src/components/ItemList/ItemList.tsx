@@ -59,22 +59,20 @@ export const ItemList = () => {
 
     return (
         <>
-            <div>
-                {listOptions.length > 0 && 
-                <div className="flex-row-center">
-                <span className={styles['selectbox-label']}>List ID: </span>
-                <Select options={listOptions} onChange={handleSelectChange} value={listSelected}/>
-                </div>
-                }
-            </div>
             {listSelected != null &&
-            <ul className={styles['item-list']}>
-                {sortItemsByName(itemsByList[listSelected.value]).map(item => (
-                    <li className={styles['item']} key={item.id}>{item.name}</li>
-                ))
-                }
-            </ul>
+                <>
+                    <div className={`${styles['selectbox-wrapper']} flex-row-center slide-in-right`}>
+                        <span className={styles['selectbox-label']}>List ID: </span>
+                        <Select options={listOptions} onChange={handleSelectChange} value={listSelected}/>
+                    </div>
+                    <ul className={`${styles['item-list']} lift-up`}>
+                        {sortItemsByName(itemsByList[listSelected.value]).map(item => (
+                            <li className={`${styles.item} fade-in`} key={item.id}>{item.name}</li>
+                        ))
+                        }
+                    </ul>
+                </>
             }
         </>
-    )
+            )
 }
